@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Jake's Modal Project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="Modal_window_JakeLee.css" media="screen" /><!-- Modal_window_JakeLee.CSS file reference -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+</head>
+<body>
+	<script>
+		window.onload = function(){		
+			$('#myModal').modal('show');
+	
+			// 'initial time' set
+			var hours = 11;  // 11 hours
+		    var minutes = 0;
+		    var seconds = 0;
+		    
+		    document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s "; // initialization
+		    
+			var counter = setInterval(timer, 1000); // update every 1 second (1000 millisecond)
+			var count = hours*3600 + minutes*60 + seconds; // convert 'initial time' to count (sec unit)
+	
+			function timer() {
+			    count = count - 1;
+			    if (count <= -1) {
+			        clearInterval(counter); // stop time.
+			        return;
+			    }
+			    seconds = count % 60;
+			    minutes = Math.floor(count / 60);
+			    hours = Math.floor(minutes / 60);
+			    minutes %= 60;
+			    hours %= 60;
+	
+			    document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s "; 
+				return;
+			}
+		};
+		
+		function validateEmail(){
+			var email = document.getElementById("email").value;
+		    var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+		    
+		    if (regex.test(email)){
+			    alert("Offer email will be sent to your email address. Thanks!")
+		    }
+		    else{
+		        alert("Please enter a valid email address.");
+		    }
+			document.getElementById("email").value = ""; // empty the input field
+		}
+	
+	</script>
+
+	<div class="container">
+	  <h2>Jake Lee merchant Black Friday special offer!</h2>
+	  <h2>Only $5 for a latest laptop.</h2>
+	  <h2>Input your email address and we will send the offer detail thru email.</h2>
+	  <h2>You have 11 Hours left to buy it :)</h2>
+	  <!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-body">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <H1>Hurry up, your offer will expire in <p class="timeline" id="timer"></p> </H1>
+	          <input type="text" name="email" class="emailInput" id="email" placeholder="emailid@domain.com">
+	          <button type="button" onclick="validateEmail()">Submit</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

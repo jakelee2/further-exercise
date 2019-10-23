@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Javascript Sample codes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="Modal_window_JakeLee.css" media="screen" /><!-- Modal_window_JakeLee.CSS file reference -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+</head>
+<body>
+	<script>
+window.onload = function(){	
+/*
+ * A closure is an inner function that has access to the outer (enclosing) function’s variables—scope chain. 
+   The closure has three scope chains: 
+	   it has access to its own scope (variables defined between its curly brackets), 
+	   it has access to the outer function’s variables, and 
+	   it has access to the global variables.
+ *
+ */
+// A Basic Example of Closures in JavaScript:
+
+	function showName(firstName, lastName) {
+		var nameIntro = "Your name is ";
+		
+		// this inner function has access to the outer function's variables, including the parameters (access to firstName and lastName)
+		function makeFullName(){
+			return nameIntro + firstName + " " + lastName;
+		}
+		return makeFullName ();
+	}
+	console.log(showName ("Michael", "Jackson")); // Your name is Michael Jackson
+
+	
+	/*
+	 * Closures’ Rules and Side Effects
+	 *
+	 * 1. Closures have access to the outer function’s variable even after the outer function returns:
+	 */
+
+	function celebrityName (firstName) {
+		var nameIntro = "This celebrity is ";
+	    // this inner function has access to the outer function's variables, including the parameter​
+	   	function lastName (theLastName) {
+			return nameIntro + firstName + " " + theLastName;
+	    }
+	    return lastName;
+	}
+	var showCelebName = celebrityName ("Michael"); // At this juncture, the celebrityName outer function has returned.​
+//  var showCelebName = function lastName(theLastName){ return nameIntro + firstName + " " + theLastName; }
+	
+	// The closure (lastName) is called here after the outer function has returned above​
+	// Yet, the closure still has access to the outer function's variables and parameter​
+	console.log(showCelebName ("Jackson")); // This celebrity is Michael Jackson
+
+	
+	function add() {
+	    var counter = 0;
+	    function plus() {counter += 1;}
+		plus();    //⇐ plus() function is call here
+	    return counter; 
+	}
+	
+	console.log(add());
+	
+	console.log("===================1");
+/*
+The self-invoking function only runs once. It sets the counter to zero (0), and returns a function expression.  
+⇒ So it becomes like  it:  
+var add1 = function () {return counter += 1;}   with counter value being 0. 
+This way ‘add1’ becomes a function. The "wonderful" part is that it can access the counter in the parent scope.
+This is called a JavaScript closure. It makes it possible for a function to have "private" variables.
+The 'counter' is protected by the scope of the anonymous function, and can only be changed using the add function.
+*/
+	var add1 = (function () {
+	    var counter = 0;	// counter is "private" variable
+	    return function () {return counter += 1;}
+	})();
+	add1();
+	add1();
+	add1();
+	console.log(add1());
+	
+	console.log("abcd: "+"abcd".includes(""));
+	
+	console.log("===================2  Closure ============");
+/*
+As you can see, a is now an object, with a method publicfunction ( a.publicfunction() ) which calls privatefunction, which only exists inside the closure. 
+You can NOT call privatefunction directly (i.e. a.privatefunction() ), just publicfunction().
+
+Its a minimal example but maybe you can see uses to it? We used this to enforce public/private methods.
+*/
+	var a = (function () {
+	    var privatefunction = function () {
+	        alert('hello private 111');
+	        return 'hello 111';
+	    }
+
+	    var privatefunction2 = function () {
+	        alert('hello private 222');
+	    }
+
+	    return {
+	        publicfunction : function () {
+	        	return privatefunction();	            
+	        },
+	    
+	        publicfunction2 : function () {
+	        	privatefunction2();	            
+	        }
+
+	    }
+	})();
+	
+	console.log("a: " + a.publicfunction());
+	a.publicfunction2();
+
+// https://javascript.info/promise-basics
+// A promise is a special JavaScript object that links the “producing code” and the “consuming code” 
+// together. In terms of our analogy: this is the “subscription list”. 
+// The “producing code” takes whatever time it needs to produce the promised result, 
+// and the “promise” makes that result available to all of the subscribed code when it’s ready.
+	
+};
+	</script>
+
+	<div class="container">
+	  <h2>Jake Lee merchant Black Friday special offer!</h2>
+	  <h2>Only $5 for a latest laptop.</h2>
+	  <h2>Input your email address and we will send the offer detail thru email.</h2>
+	  <h2>You have 11 Hours left to buy it :)</h2>
+	  <!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-body">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <H1>Hurry up, your offer will expire in <p class="timeline" id="timer"></p> </H1>
+	          <input type="text" name="email" class="emailInput" id="email" placeholder="emailid@domain.com">
+	          <button type="button" onclick="validateEmail()">Submit</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

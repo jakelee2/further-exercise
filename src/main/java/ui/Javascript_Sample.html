@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Javascript Sample codes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="Modal_window_JakeLee.css" media="screen" /><!-- Modal_window_JakeLee.CSS file reference -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+</head>
+<!-- 
+C:\projects\further-going\coding-exercise\jake\src\main\java\ui
+ -->
+<body>
+	<script>
+window.onload = function(){		
+/*
+	difference == vs ===
+	 The == operator will compare for equality after doing any necessary ‘type conversions’. 
+	 The === operator will not do the conversion, so if two values are not the same type === will simply return false. 
+	 It's this case where === will be faster, and may return a different result than ==. 
+	 In all other cases performance will be the same.
+*/		
+			var bar = null;
+			console.log(typeof bar === "object");  								// true
+			
+			bar = function(){};
+			console.log((bar !== null) && (typeof bar === "object"));  			// false
+			console.log((bar !== null) && 
+					((typeof bar === "object") || (typeof bar === "function")));// true
+					
+			bar = [];	// false for array
+			console.log((bar !== null) && (typeof bar === "object") && 
+					(toString.call(bar) !== "[object Array]"));					// false
+			console.log((bar !== null) && (typeof bar === "object") && 
+					(! $.isArray(bar)));										// false
+			console.log("===================1");
+			console.log(bar !== null);											// true
+			console.log(typeof bar === "object");								// true
+			console.log($.isArray(bar));										// true
+			console.log(bar.toString);											// ƒ toString() { [native code] }
+			console.log(toString.call(bar));									// [object Array]
+					
+			console.log("===================2");
+//			Object.prototype.toString
+
+			var o = new Object();
+			console.log(o.toString()); 											// [object Object]
+			
+			// Function.prototype.toString: Returns a string representing the source code of the function	  
+			var fn = function(x) {return x;}
+			console.log(fn.toString());											// "function (x) {return x;}"
+			
+			var x = new String("Hi"); 
+			console.log(x.toString());											// "Hi"
+
+//			Array.prototype.toString
+			
+			arr = ['a', 'b', 'c'];
+			x = arr.toString()
+			y = arr.join(',')
+			console.log(x);														// a,b,c
+			console.log(y);														// a,b,c
+			// The above two expressions are equivalent, both return: a,b,c
+
+			var count = 10;
+
+			console.log(count.toString()); 										// displays '10'
+			console.log((17).toString()); 										// displays '17'
+			console.log((count+5).toString()); 									// displays '15'
+			console.log((count+5).toString() + 7); 								// displays '157'
+			console.log((count+5).toString() +'87'); 							// displays '1587'
+
+			
+/*
+number.toString(radix)
+
+radix	Optional. Which base to use for representing a numeric value. Must be an integer between 2 and 36.
+2 - The number will show as a binary value
+8 - The number will show as an octal value
+16 - The number will show as an hexadecimal value
+*/
+console.log("===================3");
+			var x = 6;
+			
+			// to binary
+			console.log(x.toString(2)); 										// displays '110'
+			// to hexadecimal
+			console.log((254).toString(16)); 									// displays 'fe'
+			
+			console.log((-10).toString(2)); 									// displays '-1010'
+			console.log((-0xff).toString(2)); 	// 0x(hexadecimal) 15x16+15, 	// displays '-11111111'
+			console.log((0xde).toString(2));	// 0x(hexadecimal) 13x16+14, 	// displays  '11011110'
+			console.log((0b11011110).toString(16));	// 0b(binary) 13x16+14, 	// displays  'de'
+			console.log((0o17).toString(16));	// 0o(octal) 1x8+7, displays  	// hexadecimal 'f'
+			
+			var toString1 = Object.prototype.toString;
+
+			console.log(toString1.call(new Date));								// [object Date]
+			console.log(toString1.call(new String));							// [object String]
+			console.log(toString1.call(Math));									// [object Math]
+
+			//Since JavaScript 1.8.5
+			console.log(toString1.call(undefined));								// [object Undefined]
+			console.log(toString1.call(null));									// [object Null]
+
+			console.log("===================4");
+
+			(function(){
+				  var a = b = 3;
+				})();
+
+			console.log("a undefined? " + (typeof a === 'undefined'));			// a undefined? true
+			console.log("a defined? " + (typeof a !== 'undefined'));			// a defined? false
+			console.log("b defined? " + (typeof b !== 'undefined'));			// b defined? true
+/*			b = 3;  // b ends up being a global variable (since it is not preceded by the var keyword)
+			var a = b;							
+*/
+			console.log("b: " + b);												// b: 3
+ 			console.log("a: " + a);												// Uncaught Error:  a is not defined at window.onload
+			console.log("===================5");
+};
+		
+	
+	</script>
+
+	<div class="container">
+	  <h2>Javascript Sample.html</h2>
+	  <h2>Look at console :)</h2>
+	  <!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-body">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <H1>Hurry up, your offer will expire in <p class="timeline" id="timer"></p> </H1>
+	          <input type="text" name="email" class="emailInput" id="email" placeholder="emailid@domain.com">
+	          <button type="button" onclick="validateEmail()">Submit</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

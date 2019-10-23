@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Javascript Sample codes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="Modal_window_JakeLee.css" media="screen" /><!-- Modal_window_JakeLee.CSS file reference -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+</head>
+<body>
+	<script>
+window.onload = function(){		
+	//	A simple function
+	var yy = 1;
+	if (function f(){}) {
+		yy += typeof f;
+	}
+	console.log(yy);								// 1undefined
+	
+	var greet = function(person, greeting) {
+		var text = greeting + ', ' + person;
+		console.log(text);
+	};
+	greet('Rebecca', 'Hello');						// Hello, Rebecca
+	
+	var greet1 = function(person, greeting) {
+	    var text = greeting + ', ' + person;
+	    return text;
+	};
+	console.log(greet1('Rebecca1','hello1'));		// hello1, Rebecca1
+
+	// 	A function that returns another function
+	var greet2 = function(person, greeting) {
+	    var text = greeting + ', ' + person;
+	    return function() { console.log(text); };
+	};
+	var greeting = greet2('Rebecca2', 'Hello2');
+	greeting();										// Hello2, Rebecca2
+
+	console.log("===================1");
+
+	(function(){
+	    var foo = 'Hello world';
+	})();
+
+//	console.log(foo);   // Uncaught ReferenceError: foo is not defined at window.onload
+	
+	//	Passing an anonymous function[==> function() { return 'hello world 22'; }] as an argument
+	var myFn = function(fn) {
+	    var result = fn();
+	    console.log(result);
+	};
+	myFn(function() { return 'hello world 22'; });	// 'hello world 22'
+	
+	//	Passing a named function (myOtherFn) as an argument	
+	var myOtherFn = function() {
+	    return 'hello world!@#';
+	};
+	myFn(myOtherFn);   								// 'hello world!@#'
+	
+//----------------------------------------
+	// Testing the type of various variables
+	var myFunction = function() {
+	    console.log('hello');
+	};
+	
+	var myObject = {
+	    foo : 'bar'
+	};
+	
+	var myArray = [ 'a', 'b', 'c' ];
+	
+	var myString = 'hello';
+	
+	var myNumber = 3;
+	
+	console.log(typeof myFunction);   // returns 'function'
+	console.log(typeof myObject);     // returns 'object'
+	console.log(typeof myArray);      // returns 'object' -- careful!
+	console.log(typeof myString);     // returns 'string';
+	console.log(typeof myNumber);     // returns 'number'	
+	console.log(typeof null);         // returns 'object' -- careful!
+	
+	
+	if (myArray.push && myArray.slice && myArray.join) {
+	    // probably an array
+	    // (this is called "duck typing")
+		console.log("Yeah1 myArray.push && myArray.slice && myArray.join");
+	}
+	
+	if (Object.prototype.toString.call(myArray) === '[object Array]') {
+		console.log("Yeah2 Object.prototype.toString.call(myArray) is [object Array]");
+	    // Definitely an array!
+	    // This is widely considered as the most robust way
+	    // to determine if a specific value is an Array.
+	}
+	
+	console.log("======== function that accepts any number of arguments =========");
+	// https://code-maven.com/javascript-function-that-accepts-any-number-of-arguments
+	
+	console.log("======== Add 2 numbers =========");
+	function add(x, y) {
+	    return x+y;
+	}
+	console.log(add(2, 3));			// 5
+	console.log(add(-1, 1));     	// 0	 
+	console.log(add(1, 1, 1));   	// 2
+
+
+	console.log("======== Add 3 numbers =========");
+	// JavaScript does not allow us to define the same function more than once with different signatures. 
+	// It just silently overrides the previous function with the new function of the same name. 
+	// So we would get the same results even if we remove the declaration with the 2 parameters.
+	
+	function add2(x, y) {
+	    return x+y;
+	}
+	function add2(x, y, z) {
+	    return x+y+z;
+	}
+	 
+	console.log(add2(2, 3));		// NaN
+	console.log(add2(-1, 1));     	// NaN
+	 
+	console.log(add2(1, 1, 1));   	// 3
+	
+	console.log("======== function that accepts any number of arguments =========");
+	// using 'arguments[]'
+	function sum() {
+	    var s = 0;
+	    for (var i=0; i < arguments.length; i++) {
+	        s += arguments[i];
+	    }
+	    return s;
+	}
+	 
+	console.log(sum(7));            // 7
+	console.log(sum(2, 3));         // 5
+	console.log(sum(-10, 1));       // -9
+	console.log(sum(1, 1, 1, 1));	// 4
+	console.log(sum());             // 0
+	
+	
+	console.log("======== stack overflow function example 1 =========");
+	function recurse(){
+	    recurse();
+	}
+//	recurse();
+
+	console.log("======== stack overflow function example 2 =========");
+	function doSomething(){
+	    doSomethingElse();
+	}
+	function doSomethingElse(){
+	    doSomething();
+	}
+//	doSomething();
+
+
+	console.log("======== how to avoid stack overflow error =========");
+	try {
+//		recurse();
+	} catch (ex) {
+		alert("Too much recursion!");
+	}
+
+};
+		
+
+	</script>
+
+	<div class="container">
+	  <h2>Jake Lee merchant Black Friday special offer!</h2>
+	  <h2>Only $5 for a latest laptop.</h2>
+	  <h2>Input your email address and we will send the offer detail thru email.</h2>
+	  <h2>You have 11 Hours left to buy it :)</h2>
+	  <!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-body">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <H1>Hurry up, your offer will expire in <p class="timeline" id="timer"></p> </H1>
+	          <input type="text" name="email" class="emailInput" id="email" placeholder="emailid@domain.com">
+	          <button type="button" onclick="validateEmail()">Submit</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

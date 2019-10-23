@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Link Bugs Page</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.css"/>
+  	<script type="text/javascript" src="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+  	
+	<style>
+		table, th, td {
+		    border: 1px solid black;
+		}
+		#title {
+			color: #0480be;
+			font-family: 'Helvetica', arial;
+			height: 3em;
+			text-align: center
+		}		
+	</style>
+</head>
+<body>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+
+} );
+</script>
+	<div id = "title"><H1>Bugs</H1></div>
+	<div class="container">
+		<table id="example" class="display" cellspacing="0" width="100%">
+			<thead>
+			  <tr>
+			    <th>Ticket ID</th>
+			    <th>Customer Name</th>
+			    <th>Product</th>
+			    <th>Status</th>
+			    <th>Assignee</th>
+			    <th>Source</th>
+			  </tr>
+		  	</thead>
+		  	<tbody>
+			  <tr>
+			    <td>3</td>
+			    <td><a class="customerInfo" href="#">Target</a></td>
+			    <td>IP Phone</td>
+			    <td>Phone system is stock.</td>
+			    <td><a class="assigneeStatus" href="#">Jake</a></td>
+			    <td><a class="linkBugs" href="Data_Table_Main_Jake.html">Go back to Main</td>	    
+			  </tr>
+
+			  <tr>
+			    <td>6</td>
+			    <td><a class="customerInfo" href="#">Yahoo</a></td>
+			    <td>IP Phone</td>
+			    <td>Phone system is stock.</td>
+			    <td><a class="assigneeStatus" href="#">Jake</a></td>
+			    <td><a class="linkBugs" href="Data_Table_Main_Jake.html">Go back to Main</td>	    
+			  </tr>
+		  	</tbody>
+		</table>
+	</div>
+</body>
+</html>

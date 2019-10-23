@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="id01"></div><br/>
+	<div id="id02"></div><br/>
+	<div id="id03"></div><br/>
+
+	<script>
+// file:///C:/projects/further-going/coding-exercise/jake/src/main/java/ui/json/JSONTesting.html
+		function myFunction(arr, divId) {
+			typeof divId !== 'undefined' ? divId : 'id01';
+			
+		    var out = "";
+		    var i;
+		    for(i = 0; i<arr.length; i++) {
+		        out += '<a href="' + arr[i].url + '">' + arr[i].display + '</a><br>';
+		    }
+		    document.getElementById(divId).innerHTML = out;
+		}
+//-------------------------------------------------------------------------
+		var myArray = [
+			{
+			"display": "JavaScript Tutorial 01",
+			"url": "http://www.w3schools.com/js/default.asp"
+			},
+			{
+			"display": "HTML Tutorial 01",
+			"url": "http://www.w3schools.com/html/default.asp"
+			},
+			{
+			"display": "CSS Tutorial 01",
+			"url": "http://www.w3schools.com/css/default.asp"
+			}
+		];
+		
+
+		myFunction(myArray, "id02");
+//-------------------------------------------------------------------------		
+		myFunction([
+		{
+		"display": "JavaScript Tutorial 02",
+		"url": "http://www.w3schools.com/js/default.asp"
+		},
+		{
+		"display": "HTML Tutorial 02",
+		"url": "http://www.w3schools.com/html/default.asp"
+		},
+		{
+		"display": "CSS Tutorial 02",
+		"url": "http://www.w3schools.com/css/default.asp"
+		}
+		], "id03");		
+
+
+	</script>
+	<script src="myJsonData.js"></script>	
+</body>
+</html>
